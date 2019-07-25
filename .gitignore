@@ -1,0 +1,10 @@
+/bin
+**/build/
+.checkstyle
+.classpath
+.project
+.idea
+.gradl
+*.ipr
+*.iws
+
