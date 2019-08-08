@@ -1,7 +1,8 @@
 package de.hhu.bsinfo.dx_graph_preprocessing.model;
 
 
-import java.io.BufferedInputStream;
+import it.unimi.dsi.fastutil.io.FastBufferedInputStream;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,10 +20,11 @@ public class WholeFileReader extends Reader {
 
     @Override
     public void readFile(String path) {
+
         try {
             final BufferedReader br = new BufferedReader(
                     new InputStreamReader(
-                            new BufferedInputStream(
+                            new FastBufferedInputStream(
                                     Files.newInputStream(Paths.get(path), StandardOpenOption.READ),
                                     1000000),
                             StandardCharsets.US_ASCII));
