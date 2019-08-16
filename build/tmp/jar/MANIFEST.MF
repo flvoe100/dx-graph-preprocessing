@@ -1,2 +1,4 @@
 Manifest-Version: 1.0
+Application-Class: de.hhu.bsinfo.dx_graph_preprocessing.DxGraphPreproc
+ essingApplication
 

@@ -34,12 +34,12 @@ public class RandomAccessReader extends Reader {
                 byteBuffer = channel.map(FileChannel.MapMode.READ_ONLY, partition.getStartByteOffset(), numberOfBytesToRead);
                 processBuffer(byteBuffer);
             } else {
-                int iterations = (int) Math.ceil(numberOfBytesToRead /(double) Integer.MAX_VALUE);
+                int iterations = (int) Math.ceil(numberOfBytesToRead / (double) Integer.MAX_VALUE);
                 LOGGER.info("Buffer can not load partition on one. Partition will be load in %d iterations", iterations);
                 int iByteRange = 0;
                 for (int i = 0; i < iterations; i++) {
                     long iOffset = partition.getStartByteOffset() + iByteRange;
-                    iByteRange = i != iterations - 1 ? Integer.MAX_VALUE:(int) numberOfBytesToRead - (i * Integer.MAX_VALUE);
+                    iByteRange = i != iterations - 1 ? Integer.MAX_VALUE : (int) numberOfBytesToRead - (i * Integer.MAX_VALUE);
                     LOGGER.info("Byterange: %d", iByteRange);
                     byteBuffer = channel.map(FileChannel.MapMode.READ_ONLY, iOffset, iByteRange);
                     processBuffer(byteBuffer);
@@ -58,7 +58,8 @@ public class RandomAccessReader extends Reader {
     private void processBuffer(MappedByteBuffer buffer) {
         buffer.load();
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < buffer.limit(); i++) {
+        int limit = buffer.limit();
+        for (int i = 0; i < limit; i++) {
             char c = (char) buffer.get();
 
             sb.append(c);
